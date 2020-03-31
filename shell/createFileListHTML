@@ -1,0 +1,24 @@
+# PowerShellスクリプト
+
+# 処理対象のフォルダ
+$targetFolder = './';
+
+# 保存ファイル名
+$fileName = 'fileList.html';
+get-date -format g > $fileName;
+
+# $targetFolder内のファイル・フォルダのリストを取得する。
+$itemList = ls $targetFolder;
+
+foreach($item in $itemList)
+{
+    if($item.PSIsContainer)
+    {
+        # フォルダの場合の処理 
+    }
+    else
+    {
+        # ファイルの場合の処理
+        echo "`<a href=`"$item`" target=`"_blank`"`> $item `</a`>`<br`>" >> $fileName; 
+    }
+} 

@@ -1,0 +1,33 @@
+<#
+ディレクトリ構造は次のようにすること
+　・（事務所名）\x00 yyaammdd（件名）
+　（中黒）＋（自由な文字列）￥（先頭12文字は自由な文字列）＋（システム登録名と一致する件名）
+
+「・」から始まるファイルを操作対象と同じところに作成しないこと
+#>
+
+
+# フォルダの指定
+Set-Location '\\'
+
+
+# 「・」から始まるフォルダを抽出
+$zimusyoList = Get-ChildItem -Recurse -Name -include ・*
+
+
+# フォルダごとの処理
+foreach($targetFolder in $zimusyoList){
+
+    # フォルダ名を取得
+    $kenmeiList = Get-ChildItem -Name $targetFolder
+
+    # フォルダごとの処理
+    foreach($str in $kenmeiList){
+
+        #先頭12文字を除く文字列を書き込む 
+        $str.SubString(12) >> '整理した件名一覧.csv'
+    }
+}
+
+# 終了
+exit

@@ -8,7 +8,7 @@ Sub OneYearsWorthOfPrinting()
    nen = Application.InputBox("年度を西暦で入力してください" & Chr(13) _
              & "例：2021", Type:=1)
 
-   If Not StrPtr(nen) Then 'キャンセルボタンが押された
+   If nen = 0 Then 'キャンセルボタンが押された
        MsgBox "キャンセルしました"
        End '終了
    End If
